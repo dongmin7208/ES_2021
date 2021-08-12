@@ -20,7 +20,7 @@
       let word; //제시어
       let newWord; //새로 입력한 단어
       const onClickButton = () => {
-        if (!word) {
+        if (!word || word[word.length - 1] === newWord[0]) {
           //제시어 비어있니?
           //비어있다면
           word = newWord; //새 제시어 시작
@@ -32,30 +32,12 @@
           } else {
             $order.textContent = order + 1;
           }
-          $input.value = ""; // 타이핑쳤던거 칸 초기화
-          $input.focus();
-
           //비어있지 않다면
         } else {
-          // 입력란 단어가 올바른가?? //끝글자와 새 글자가 올바른가?
-          if (word[word.length - 1] === newWord[0]) {
-            word = newWord; //그렇다면 입력한단어 제시어로
-            $word.textContent = word; //입력값
-            $input.value = ""; //하고난다음 텍스트 초기화
-            const order = Number($order.textContent);
-            if (order + 1 > number) {
-              // 다음순서
-              $order.textContent = 1;
-            } else {
-              $order.textContent = order + 1;
-            }
-            $input.focus();
-          } else {
-            alert(newWord + " 올바르지 않는 단어");
-            $input.value = ""; //하고난다음 텍스트 초기화
-            $input.focus();
-          }
+          alert(newWord + " < 올바르지 않는 단어");
         }
+        $input.value = ""; //하고난다음 텍스트 초기화
+        $input.focus();
       };
       const onInput = (event) => {
         newWord = event.target.value;
