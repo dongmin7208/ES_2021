@@ -12,8 +12,20 @@
     <input type="text">
     <button>입력</button>
     <script>
-        const number = parseInt(prompt("몇명이 참가하나여"), 10);
-        console.log("number",number);
+        const number = Number(prompt("몇명이 참가하나요?"));
+        const $button = document.querySelector("button");
+        const $input = document.querySelector("input");
+
+        const onClickButton = () => {
+            
+        };
+        const onInput = (event) => {
+
+        };
+        $button.addEventListener("click",onClickButton);
+        $input.addEventListener("input",onInput);
+
+    
     </script>
 </body>
 </html>
