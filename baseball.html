@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <form id="form">
+      <input type="text" id="input" />
+      <button>確認</button>
+    </form>
+    <div id="logs"></div>
+    //
+    <script>
+      const $input = document.querySelector("#input");
+      const $form = document.querySelector("#form");
+      const $logs = document.querySelector("#logs");
+
+      const numbers = [];
+      for (let n = 0; n < 9; n += 1) {
+        numbers.push(n + 1);
+      }
+      const answer = [];
+      for (let n = 0; n <= 3; n += 1) {
+        // random() * 9);
+        // random() * (9 - n);
+        // random() * (numbers.length);
+        const index = Math.floor(Math.random() * numbers.length);
+        answer.push(numbers[index]); //뽑아주면
+        numbers.splice(index, 1); //원래있던거 짤라주기
+      }
+      console.log(answer);
+
+      $form.addEventListener("submit", (event) => {
+        event.preventDefault(); //기본동작 막기
+        console.log("서브밋");
+      });
+    </script>
+  </body>
+</html>
