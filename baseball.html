@@ -12,7 +12,7 @@
       <button>確認</button>
     </form>
     <div id="logs"></div>
-    //
+
     <script>
       const $input = document.querySelector("#input");
       const $form = document.querySelector("#form");
@@ -33,9 +33,80 @@
       }
       console.log(answer);
 
+      const tries = []; //받는 입력 배열
+
+      //검사하는 코드
+      //코드가 점점 길어지면 어디서부터 어디까지인 잊어먹음. 주석많이써야함
+      function checkInput(input) {
+        if (input.length !== 4) {
+          //길이 4까지
+          return alert("4字まで");
+        }
+        if (new Set(input).size !== 4) {
+          return alert("중복되지 않게 입력해 주세요");
+        }
+        if (tries.includes(input)) {
+          return alert("이미 시도한 값입니다.");
+        }
+        return true;
+      }
+
+      function defeated() {
+        const message = document.createTextNode(
+          `패배! 정답은 ${answer.join("")}`
+        );
+        $logs.appendChild(message);
+      }
+
       $form.addEventListener("submit", (event) => {
         event.preventDefault(); //기본동작 막기
-        console.log("서브밋");
+        const value = $input.value;
+        $input.value = ""; //빈칸만들어주게 센스
+        if (!checkInput(value)) {
+          //이상한 입력값 받으면 멈춰버리기
+          return;
+        }
+        if (answer.join("") === value) {
+          // [3, 1, 4, 6] -> '3146'
+          $logs.textContent = "homerun!";
+          return;
+        }
+        if (tries.length >= 9) {
+          defeated();
+          return;
+        }
+        // 몇 스트라이크 몇 볼인지 검사
+
+        let strike = 0;
+        let ball = 0;
+        //answer: 3146, value: 1234
+        for (let i = 0; i < answer.length; i++) {
+          const index = value.indexOf(answer[i]);
+          if (index > -1) {
+            //일치하는숫자발견
+            if (index === i) {
+              //자릿수도같음
+              strike += 1;
+            } else {
+              //숫자만같음
+              ball += 1;
+            }
+          }
+        }
+        if (strike === 0 && ball === 0) {
+          out++;
+          $logs.append(`${value}:아웃`, document.createElement("br"));
+        } else {
+          $logs.append(
+            `${value}: ${strike} strike ${ball} ball`,
+            document.createElement("br")
+          );
+          if (out === 3) {
+            defeated();
+            return;
+          }
+        }
+        tries.push(value);
       });
     </script>
   </body>
