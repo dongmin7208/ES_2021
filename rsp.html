@@ -58,7 +58,6 @@
         scissors: 1,
         paper: -1,
       };
-
       // clickButton 5번 호출, 인터벌 1번, 2번, 3번, 4번, 5번(얘만 intervalId)
       //  그 다음에 버튼을 클릭하면 5번만 취소
       let clickable = true;
@@ -79,6 +78,8 @@
           const diff = myScore - computerScore;
 
           let message;
+          // diff === 'sdf' || diff === 'sadf' || diff === '2sad' 말고 밑에 문법으러
+          //['sdf', 'sadf', '2sad'].includes(diff);
           // 2, -1은 승리조건이고, -2, 1은 패배조건, 점수표 참고
           if ([2, -1].includes(diff)) {
             score += 1;
