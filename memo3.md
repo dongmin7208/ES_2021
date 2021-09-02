@@ -32,3 +32,26 @@ console.log(diff / 1000 / 60 / 60 / 24);
 
 p , c
 현재, 이전꺼
+
+JSON 쓰면 깊은 복사 가능하나
+성능도 느리고 Math, Date같은 객체를 복사 할 수 없다는 단점이 있음
+실무= lodash 같은 라이브러리(다른사람만들어둔 코드) 사용.
+
+```
+const a = 'b';
+const c = ['d',true,1];
+const e = {g: 'h'};
+const i = [{j:'k'}, {l: 'm'}];
+const n = {o: {p: 'q'}};
+
+const a1= a;
+const c1= [...c]
+const e1= {...e}
+const i1= JSON.parse(JSON.stringify(i))
+const n1= JSON.parse(JSON.stringify(n))
+
+```
+
+this는 화살표 함수 안에서는 작동 안됨
+그냥 펑션일때..
+화살표 함수 안에서 this는 윈도우가 되어버림
